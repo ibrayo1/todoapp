@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
 
   isCollapsed = true;
+  isUserLoggedIn = false;
 
-  constructor(private router: Router) { }
+  constructor(public hardcodedAuthenticationService
+    : HardcodedAuthenticationService) { }
 
   ngOnInit(): void {
+    this.isUserLoggedIn = this.hardcodedAuthenticationService.isUserLoggedIn();
   }
 
   toggleNav(): void {

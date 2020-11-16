@@ -8,12 +8,20 @@
       </button>
 
       <div class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/']" (click)="toggleNav()">Home</a>
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="nav-link" [routerLink]="['/']" (click)="toggleNav()">Home</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/todos']" (click)="toggleNav()">Todos</a>
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="nav-link" [routerLink]="['/todos']" (click)="toggleNav()">Todos</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" routerLinkActive="active">
+            <a *ngIf="!hardcodedAuthenticationService.isUserLoggedIn()" class="nav-link" [routerLink]="['/login']" (click)="toggleNav()">Login</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="nav-link" [routerLink]="['/logout']" (click)="toggleNav()">Logout</a>
           </li>
         </ul>
       </div>
