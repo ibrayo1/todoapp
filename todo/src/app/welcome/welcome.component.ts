@@ -10,6 +10,7 @@ import { WelcomeDataService } from '../service/data/welcome-data.service';
 export class WelcomeComponent implements OnInit {
 
   name = '';
+  welcomeMessageFromService: string;
 
   // ActivatedRoute
   constructor(
@@ -22,7 +23,33 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeMessage(): void {
-    console.log(this.service.executeHellowWorldBeanService());
+    // console.log(this.service.executeHellowWorldBeanService());
+
+    this.service.executeHellowWorldBeanService().subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+    );
+
+    // console.log('last line of getWelcomeMessage');
+  }
+
+  getWelcomeMessageWithParameter(): void {
+    // console.log(this.service.executeHellowWorldBeanService());
+
+    this.service.executeHellowWorldBeanServiceWithPathVariable(this.name).subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+    );
+
+    // console.log('last line of getWelcomeMessage');
+  }
+
+  handleSuccessfulResponse(response: any): any{
+    this.welcomeMessageFromService = response.message;
+  }
+
+  handleErrorResponse(error: any): any {
+    this.welcomeMessageFromService = error.error.message;
   }
 
 }
