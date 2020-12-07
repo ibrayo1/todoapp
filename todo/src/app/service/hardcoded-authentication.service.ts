@@ -9,18 +9,18 @@ export class HardcodedAuthenticationService {
 
   authenticate(username: string, password: string): boolean{
     if (username === 'in28Minutes' && password === 'dummy'){
-      sessionStorage.setItem('authenticateUser', username);
+      sessionStorage.setItem('authenticaterUser', username);
       return true;
     }
     return false;
   }
 
   isUserLoggedIn(): boolean{
-    const user = sessionStorage.getItem('authenticateUser');
+    const user = sessionStorage.getItem('authenticaterUser');
     return !(user === null);
   }
 
   logout(): void {
-    sessionStorage.removeItem('authenticateUser');
+    sessionStorage.removeItem('authenticaterUser');
   }
 }
